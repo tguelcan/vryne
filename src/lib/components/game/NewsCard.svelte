@@ -35,11 +35,11 @@
       <div class="text-lg">{effectLabel}</div>
     {/if}
     {#if remaining}
-      <div class="text-muted text-xs">ends in {remaining}</div>
+      <div class="text-base-content/50 text-xs">ends in {remaining}</div>
     {/if}
   {:else}
     <div class="text-sm">No disruptions</div>
-    <div class="text-muted text-xs">
+    <div class="text-base-content/50 text-xs">
       {upcomingIn ? `next event in ${upcomingIn}` : "grid running steady"}
     </div>
   {/if}

@@ -24,12 +24,12 @@
 <section class="border-base-content rounded-box border p-3 text-sm">
   <div class="flex items-baseline justify-between">
     <span>WEATHER</span>
-    <span class="text-muted text-xs">
+    <span class="text-base-content/50 text-xs">
       {solarWm2} W/m² · {windMs} m/s
       {estimated ? "~" : ""}
     </span>
   </div>
-  <div class="text-muted mt-2 flex items-center gap-1 text-xs">
+  <div class="text-base-content/50 mt-2 flex items-center gap-1 text-xs">
     <Icon name="Sun03Icon" size={12} /> solar
   </div>
   <StrokeRow
@@ -42,7 +42,7 @@
     highlightIndex={0}
     height="h-10"
   />
-  <div class="text-muted mt-2 flex items-center gap-1 text-xs">
+  <div class="text-base-content/50 mt-2 flex items-center gap-1 text-xs">
     <Icon name="FastWindIcon" size={12} /> wind (cutoff at 20 m/s)
   </div>
   <StrokeRow

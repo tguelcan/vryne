@@ -60,7 +60,7 @@
     <span class="flex items-center gap-1"
       ><Icon name="Settings01Icon" size={12} /> DEV PANEL</span
     >
-    <span class="text-muted">offset {offsetLabel}</span>
+    <span class="text-base-content/50">offset {offsetLabel}</span>
   </div>
 
   <div class="mt-2 flex flex-wrap gap-2">
@@ -69,7 +69,7 @@
       <Button
         type="button"
         size="sm"
-        class="btn-outline"
+        color="outline"
         disabled={busy}
         ariaLabel="Advance time {label}"
         onclick={() => run(() => devAdvanceTime({ ms: Number(ms) }))}
@@ -85,9 +85,7 @@
       <Button
         type="button"
         size="sm"
-        class={(weatherFixture ?? "live") === fixture
-          ? "btn-neutral"
-          : "btn-outline"}
+        color={(weatherFixture ?? "live") === fixture ? "neutral" : "outline"}
         disabled={busy}
         ariaLabel="Set weather fixture {fixture}"
         onclick={() =>
@@ -109,9 +107,7 @@
       <Button
         type="button"
         size="sm"
-        class={(newsOverride ?? "live") === option.value
-          ? "btn-neutral"
-          : "btn-outline"}
+        color={(newsOverride ?? "live") === option.value ? "neutral" : "outline"}
         disabled={busy}
         ariaLabel="Set news simulation {option.label}"
         onclick={() =>
@@ -127,7 +123,7 @@
     <Button
       type="button"
       size="sm"
-      class="btn-outline"
+      color="outline"
       disabled={busy}
       ariaLabel="Add 100 credits"
       onclick={() => run(() => devSetResources({ creditsCents: 100_000 }))}
@@ -137,7 +133,7 @@
     <Button
       type="button"
       size="sm"
-      class="btn-outline"
+      color="outline"
       disabled={busy}
       ariaLabel="Set material to 500"
       onclick={() => run(() => devSetResources({ material: 500 }))}
@@ -147,7 +143,7 @@
     <Button
       type="button"
       size="sm"
-      class="btn-outline"
+      color="outline"
       disabled={busy}
       ariaLabel="Empty storage"
       onclick={() => run(() => devSetResources({ energyWh: 0 }))}
@@ -157,7 +153,7 @@
     <Button
       type="button"
       size="sm"
-      class="btn-outline"
+      color="outline"
       disabled={busy}
       ariaLabel="Reset player"
       onclick={() => run(() => devResetPlayer())}

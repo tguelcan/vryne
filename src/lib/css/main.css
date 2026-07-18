@@ -1,49 +1,24 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
-@plugin 'daisyui';
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
 
-@plugin 'daisyui/theme' {
-	name: "light"
-	color-scheme: "light";
-	--border: 0px;
-	--depth: 0;
-	--noise: 0;
-}
-
-/**
-* Create and override daisyUI theme variables.
-*/
 /* Vryne: monospace everywhere — no per-component font classes needed. */
 @layer base {
-	body {
-		font-family: var(--font-mono);
-	}
+  body {
+    font-family: var(--font-mono);
+  }
 }
 
-.text-muted {
-	@apply text-neutral/50;
-}
-
-.input, .select, .textarea {
-	@apply bg-base-200 w-full;
-}
-
-.btn-neutral {
-	@apply hover:text-base-100;
-}
-/*
- * Animations (replaces tailwindcss-motion)
- * Usage: animate-fade-in
- */
+/* Animations. Usage: `animate-fade-in`. */
 @theme {
-	--animate-fade-in: fade-in 0.2s ease-out;
+  --animate-fade-in: fade-in 0.2s ease-out;
 }
 
 @keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -1,33 +1,33 @@
 {
-	"app": {
-		"name": "vryne",
-		"version": "0.1.0"
-	},
-	"theme": {
-		"name": "vryne-default",
-		"colors": {
-			"primary": "oklch(0.6332 0.1996 39.62)",
-			"primary-content": "oklch(1 0 120.89)",
-			"secondary": "oklch(0.346658 0.059174 194.7689)",
-			"secondary-content": "oklch(1 0 120.89)",
-			"accent": "oklch(0.5879 0.2358 6.38)",
-			"neutral": "oklch(0.2046 0 0)",
-			"base-100": "oklch(100% 0 0)",
-			"base-200": "oklch(96% 0 0)",
-			"base-300": "oklch(92% 0 0)",
-			"base-content": "oklch(20% 0 0)"
-		},
-		"radius": {
-			"selector": "0.25rem",
-			"field": "0.25rem",
-			"box": "0.25rem"
-		},
-		"size": {
-			"selector": "0.25rem",
-			"field": "0.25rem"
-		},
-		"border": "0",
-		"depth": "0",
-		"noise": "0"
-	}
+  "app": {
+    "name": "vryne",
+    "version": "0.1.0"
+  },
+  "theme": {
+    "name": "vryne-default",
+    "colors": {
+      "primary": "oklch(0.6332 0.1996 39.62)",
+      "primary-content": "oklch(1 0 120.89)",
+      "secondary": "oklch(0.346658 0.059174 194.7689)",
+      "secondary-content": "oklch(1 0 120.89)",
+      "accent": "oklch(0.5879 0.2358 6.38)",
+      "neutral": "oklch(0.2046 0 0)",
+      "base-100": "oklch(100% 0 0)",
+      "base-200": "oklch(96% 0 0)",
+      "base-300": "oklch(92% 0 0)",
+      "base-content": "oklch(20% 0 0)"
+    },
+    "radius": {
+      "selector": "0.25rem",
+      "field": "0.25rem",
+      "box": "0.25rem"
+    },
+    "size": {
+      "selector": "0.25rem",
+      "field": "0.25rem"
+    },
+    "border": "0",
+    "depth": "0",
+    "noise": "0"
+  }
 }

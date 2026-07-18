@@ -20,14 +20,14 @@
 
 <main class="flex flex-col gap-6">
   {#if !p}
-    <p class="text-muted text-sm">loading profile…</p>
+    <p class="text-base-content/50 text-sm">loading profile…</p>
   {:else}
     <section class="flex flex-col gap-1">
       <h2 class="text-sm tracking-widest">PROFILE</h2>
       <p class="text-lg">{p.nickname}</p>
-      <p class="text-muted text-xs">{p.email}</p>
+      <p class="text-base-content/50 text-xs">{p.email}</p>
       {#if p.createdAtMs}
-        <p class="text-muted text-xs">
+        <p class="text-base-content/50 text-xs">
           grid online since {new Date(p.createdAtMs).toISOString().slice(0, 10)}
         </p>
       {/if}
@@ -35,20 +35,20 @@
 
     <section class="flex flex-col gap-1 text-xs">
       <p>LV{p.progress.level} · {p.progress.title}</p>
-      <p class="text-muted">{p.xp} xp</p>
+      <p class="text-base-content/50">{p.xp} xp</p>
       {#if p.rank}
-        <p class="text-muted">
+        <p class="text-base-content/50">
           rank <a class="underline" href="/leaderboard">#{p.rank}</a> of {p.totalPlayers}
         </p>
       {/if}
     </section>
 
     <section class="flex flex-col gap-2">
-      <h3 class="text-muted text-xs tracking-widest">CHANGE NICKNAME</h3>
+      <h3 class="text-base-content/50 text-xs tracking-widest">CHANGE NICKNAME</h3>
       <form {...setNickname} class="flex max-w-xs flex-col gap-2">
         <input
           {...setNickname.fields.nickname.as("text")}
-          class="input"
+          class="input w-full bg-base-200"
           placeholder={p.nickname ?? "nickname"}
           autocomplete="off"
           maxlength={20}

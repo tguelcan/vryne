@@ -5,10 +5,11 @@
 </script>
 
 <footer
-  class="border-base-300 text-muted mt-8 flex items-baseline justify-between gap-4 border-t pt-3 text-xs"
+  class="border-base-300 text-base-content/50 mt-8 flex items-baseline justify-between gap-4 border-t pt-3 text-xs"
 >
   <span>© {year} VRYNE</span>
   <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-1">
+    <a class="hover:underline" href="/guide">how to play</a>
     <a class="hover:underline" href="/leaderboard">leaderboard</a>
     <a class="hover:underline" href="/privacy">privacy</a>
     <a class="hover:underline" href="/terms">terms</a>

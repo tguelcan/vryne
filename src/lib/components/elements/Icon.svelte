@@ -27,10 +27,11 @@
   });
 </script>
 
-<div class="inline-flex shrink-0" style="width:{size}px;height:{size}px;">
+<!-- span, not div: icons must be valid inside <p> (e.g. markdown pages) -->
+<span class="inline-flex shrink-0" style="width:{size}px;height:{size}px;">
   {#if icon}
-    <div transition:fade>
+    <span class="inline-flex" transition:fade>
       <HugeiconsIcon {icon} {size} {strokeWidth} color="currentColor" />
-    </div>
+    </span>
   {/if}
-</div>
+</span>

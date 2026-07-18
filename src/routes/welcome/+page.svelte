@@ -10,13 +10,13 @@
 
   <form {...setNickname} class="flex flex-col gap-4">
     <div class="flex flex-col gap-2">
-      <p class="text-muted text-xs">
+      <p class="text-base-content/50 text-xs">
         Your public handle on the leaderboard. 3–20 characters: letters, digits,
         - and _.
       </p>
       <input
         {...setNickname.fields.nickname.as("text")}
-        class="input"
+        class="input w-full bg-base-200"
         placeholder="nickname"
         autocomplete="off"
         maxlength={20}
@@ -27,14 +27,14 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <p class="text-muted text-xs">
+      <p class="text-base-content/50 text-xs">
         Your home town decides your real weather — sun and wind from your area
         power your grid. Only a coarse ~150 km region is stored, never the exact
         place. Set once.
       </p>
       <input
         {...setNickname.fields.location.as("text")}
-        class="input"
+        class="input w-full bg-base-200"
         placeholder="home town, e.g. Braunschweig"
         autocomplete="off"
         maxlength={80}

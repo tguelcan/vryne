@@ -190,7 +190,7 @@
 
 <main class="flex flex-col gap-4">
   {#if !s}
-    <p class="text-muted text-sm">loading grid…</p>
+    <p class="text-base-content/50 text-sm">loading grid…</p>
   {:else}
     <GameHeader
       nickname={page.data.user?.nickname ?? ""}

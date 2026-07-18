@@ -29,7 +29,7 @@
       <Button
         type="button"
         size="sm"
-        class="btn-outline"
+        color="outline"
         icon="DiscountIcon"
         disabled={busy || energyNowWh < 1}
         loading={sellAction === "quarter"}
@@ -41,7 +41,7 @@
       <Button
         type="button"
         size="sm"
-        class="btn-neutral"
+        color="neutral"
         icon="CoinsDollarIcon"
         disabled={busy || energyNowWh < 1}
         loading={sellAction === "max"}
@@ -54,6 +54,6 @@
     </div>
   </div>
   {#if message}
-    <p class="text-muted mt-2 text-xs">{message}</p>
+    <p class="text-base-content/50 mt-2 text-xs">{message}</p>
   {/if}
 </section>

@@ -8,7 +8,7 @@
 </script>
 
 <div class="border-base-content rounded-box border p-3">
-  <div class="text-muted flex items-center gap-1 text-xs">
+  <div class="text-base-content/50 flex items-center gap-1 text-xs">
     <Icon name={icon} size={12} />
     {label}
   </div>

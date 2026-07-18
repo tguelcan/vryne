@@ -61,7 +61,7 @@
     </span>
     <span class="flex items-center gap-1 text-lg">
       {#if effectiveMilliCents !== priceMilliCents}
-        <s class="text-muted text-sm">{centsPerKwh(priceMilliCents)}</s>
+        <s class="text-base-content/50 text-sm">{centsPerKwh(priceMilliCents)}</s>
         {centsPerKwh(effectiveMilliCents)} ct/kWh{estimated ? " ~" : ""}
       {:else}
         {centsPerKwh(priceMilliCents)} ct/kWh{estimated ? " ~" : ""}
@@ -139,7 +139,7 @@
       height="h-24"
       class="mt-auto pt-2"
     />
-    <div class="text-muted mt-1 flex justify-between text-xs">
+    <div class="text-base-content/50 mt-1 flex justify-between text-xs">
       <span>now</span>
       {#if peak}
         <span

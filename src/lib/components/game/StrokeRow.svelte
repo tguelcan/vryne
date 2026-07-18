@@ -43,7 +43,7 @@
 >
   {#if hovered >= 0 && labels[hovered]}
     <span
-      class="bg-base-100 text-muted pointer-events-none absolute -top-1 right-0 z-10 px-1 text-xs"
+      class="bg-base-100 text-base-content/50 pointer-events-none absolute -top-1 right-0 z-10 px-1 text-xs"
     >
       {labels[hovered]}
     </span>

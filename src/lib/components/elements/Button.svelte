@@ -80,6 +80,7 @@
     error: "btn-error",
     ghost: "btn-ghost",
     link: "btn-link",
+    outline: "btn-outline",
   };
 
   const sizeMap: Partial<Record<string, string>> = {

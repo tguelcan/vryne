@@ -47,7 +47,7 @@
   <div class="text-sm">{name}</div>
   <div class="text-lg">{stat}</div>
   {#if detail}
-    <div class="text-muted text-xs">{detail}</div>
+    <div class="text-base-content/50 text-xs">{detail}</div>
   {/if}
 
   {#if upgradeCountdown !== null}
@@ -58,7 +58,8 @@
     <Button
       type="button"
       size="sm"
-      class="btn-outline mt-auto"
+      color="neutral"
+      class="mt-auto"
       disabled={!canAfford || busy}
       {loading}
       onclick={onUpgrade}
@@ -67,6 +68,6 @@
       LV{level + 1} — {next.materialCost} mat / {next.durationLabel}
     </Button>
   {:else}
-    <div class="text-muted text-xs">max level</div>
+    <div class="text-base-content/50 text-xs">max level</div>
   {/if}
 </div>

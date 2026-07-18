@@ -49,7 +49,7 @@
       <a href="/profile" class="hover:underline">{nickname}</a>
       · LV{progress.level} · {progress.title}
     </span>
-    <span class="text-muted flex items-center gap-2">
+    <span class="text-base-content/50 flex items-center gap-2">
       <Icon name={weatherIcon} size={16} />
       {regionName} · {timeLabel}
     </span>
@@ -57,7 +57,7 @@
 
   <!-- Thin XP progress bar -->
   <div class="mt-2 flex justify-end text-xs">
-    <span class="text-muted">
+    <span class="text-base-content/50">
       {progress.xpForNext === null
         ? `${progress.xp} xp · max`
         : `${progress.xpIntoLevel}/${progress.xpForNext} xp`}
