@@ -49,20 +49,16 @@
     </span>
   {/if}
   {#each heights as h, i (i)}
-    <!-- Wide invisible hitbox, thin visible stroke -->
+    <!-- Wide invisible hitbox; the current hour is thicker and pulses -->
     <div
       class="flex h-full flex-1 items-end justify-center"
       role="presentation"
       onmouseenter={() => (hovered = i)}
     >
       <div
-        class="w-0.75 {i === highlightIndex
-          ? 'bg-primary'
-          : 'bg-base-content'} {muted[i] &&
-        i !== highlightIndex &&
-        hovered !== i
-          ? 'opacity-30'
-          : ''}"
+        class={i === highlightIndex
+          ? "bg-primary w-1.5 animate-pulse"
+          : `bg-base-content w-1 ${muted[i] && hovered !== i ? "opacity-30" : ""}`}
         style="height: {h}%"
       ></div>
     </div>

@@ -44,7 +44,9 @@
     </section>
 
     <section class="flex flex-col gap-2">
-      <h3 class="text-base-content/50 text-xs tracking-widest">CHANGE NICKNAME</h3>
+      <h3 class="text-base-content/50 text-xs tracking-widest">
+        CHANGE NICKNAME
+      </h3>
       <form {...setNickname} class="flex max-w-xs flex-col gap-2">
         <input
           {...setNickname.fields.nickname.as("text")}

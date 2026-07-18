@@ -107,7 +107,9 @@
       <Button
         type="button"
         size="sm"
-        color={(newsOverride ?? "live") === option.value ? "neutral" : "outline"}
+        color={(newsOverride ?? "live") === option.value
+          ? "neutral"
+          : "outline"}
         disabled={busy}
         ariaLabel="Set news simulation {option.label}"
         onclick={() =>
