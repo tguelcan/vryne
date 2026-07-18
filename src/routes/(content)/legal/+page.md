@@ -1,23 +1,15 @@
 # Legal Notice
 
-<!-- TODO: Replace the placeholders below with the real operator details.   -->
-<!-- In Germany this page must satisfy § 5 DDG (Impressumspflicht).          -->
-
 ## Operator
 
-Vryne
-[Operator name]
-[Street and number]
-[Postal code, City]
+Tayfun Gülcan\
+Franz-Liszt-Str. 38\
+38106 Braunschweig\
 Germany
 
 ## Contact
 
-Email: [contact email]
-
-## Responsible for content
-
-[Responsible person, address as above]
+Email: vryne@proton.me
 
 ## Disclaimer
 
