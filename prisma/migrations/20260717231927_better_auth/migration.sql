@@ -1,0 +1,2 @@
+-- No-op: artifact of an aborted "prisma migrate diff" invocation. Kept because
+-- it is already recorded as applied in _prisma_migrations.

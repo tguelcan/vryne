@@ -1,0 +1,21 @@
+node_modules/
+
+# Output
+.output/
+.svelte-kit/
+build/
+dist/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Generated
+.prisma/
+src/generated/prisma
+
+# OS / editor
+.DS_Store
+Thumbs.db
+vite.config.ts.timestamp-*

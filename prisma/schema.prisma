@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Better Auth models (social login only). Generated per the official
+// Prisma adapter schema; `nickname` is a custom additional field.
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  /// Public game handle, chosen once after first sign-in. Required to play.
+  nickname      String?   @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  player        Player?
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verification")
+}
+
+// ---------------------------------------------------------------------------
+// Vryne game models
+// ---------------------------------------------------------------------------
+
+enum BuildingType {
+  SOLAR
+  WIND
+  STORAGE
+  GRID
+  FABRICATOR
+}
+
+model Player {
+  id           String     @id @default(uuid())
+  /// Link to the auth user owning this grid. Nullable for legacy seed data.
+  userId       String?    @unique
+  user         User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  regionId     String
+  region       Region     @relation(fields: [regionId], references: [id])
+  /// Credits in cents (integer).
+  creditsCents Int        @default(0)
+  material     Int        @default(0)
+  /// Stored energy in watt-hours (integer). Capacity is derived from the
+  /// STORAGE building level via gameConfig, never stored here.
+  energyWh     Int        @default(0)
+  /// Experience points: earned by selling energy and finishing upgrades.
+  xp           Int        @default(0)
+  createdAt    DateTime   @default(now())
+  buildings    Building[]
+}
+
+model Region {
+  id           String        @id
+  name         String
+  latitude     Float
+  longitude    Float
+  /// Regional long-term average daytime shortwave radiation (W/m²),
+  /// used for fairness normalization.
+  avgSolarWm2  Float
+  /// Regional long-term average wind speed at 10m (m/s).
+  avgWindMs    Float
+  players      Player[]
+  weatherHours WeatherHour[]
+}
+
+model Building {
+  id             String       @id @default(uuid())
+  playerId       String
+  player         Player       @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  type           BuildingType
+  level          Int          @default(1)
+  /// Lazy evaluation anchor: progress is integrated from here to gameNow().
+  lastSettledAt  DateTime
+  /// Sub-unit remainder carried between settlements (milli-Wh for producers,
+  /// milli-material for the fabricator) so frequent reads lose nothing.
+  remainderMilli Int          @default(0)
+  /// When set, an upgrade to level+1 completes at this UTC instant.
+  upgradeDoneAt  DateTime?
+
+  @@unique([playerId, type])
+}
+
+/// Weather cache: one row per region per full UTC hour. Never per player.
+model WeatherHour {
+  regionId  String
+  region    Region   @relation(fields: [regionId], references: [id])
+  /// Full hour, UTC (minutes/seconds zero).
+  hourUtc   DateTime
+  solarWm2  Float
+  windMs    Float
+  /// True when the row comes from the synthetic fallback, not the live API.
+  estimated Boolean  @default(false)
+
+  @@id([regionId, hourUtc])
+}
+
+/// Spot price cache (Germany-wide day-ahead), one row per full UTC hour.
+model PriceHour {
+  /// Full hour, UTC.
+  hourUtc               DateTime @id
+  /// Price in milli-cents per kWh (integer, can be negative).
+  priceMilliCentsPerKwh Int
+  /// True when the row comes from the synthetic fallback curve.
+  estimated             Boolean  @default(false)
+}
+
+/// Persisted headline for a deterministically scheduled news event.
+/// The schedule/effect is a pure function of time; only the (LLM-generated)
+/// headline text needs storage. Keyed by the schedule block index.
+model NewsEvent {
+  /// Schedule block index (see news.ts), as string.
+  id        String   @id
+  kind      String
+  headline  String
+  /// True when the headline came from the LLM (false = template fallback).
+  generated Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
