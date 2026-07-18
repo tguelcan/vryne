@@ -38,6 +38,11 @@ export const auth = betterAuth({
       nickname: { type: "string", required: false, input: false },
     },
   },
+  advanced: {
+    // Behind Railway's proxy the client IP arrives via X-Forwarded-For;
+    // without this, rate limiting falls back to one shared bucket.
+    ipAddress: { ipAddressHeaders: ["x-forwarded-for"] },
+  },
   plugins: [sveltekitCookies(getRequestEvent)],
 });
 
