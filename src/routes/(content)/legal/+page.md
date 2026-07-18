@@ -2,9 +2,9 @@
 
 ## Operator
 
-Tayfun Gülcan\
-Franz-Liszt-Str. 38\
-38106 Braunschweig\
+Tayfun Gülcan<br />
+Franz-Liszt-Str. 38<br />
+38106 Braunschweig<br />
 Germany
 
 ## Contact
