@@ -70,6 +70,7 @@ export async function settlePlayer(
     ),
   );
   const weather = await ensureWeatherHours(
+    player.region,
     new Date(earliest),
     new Date(now.getTime() + 24 * HOUR_MS),
     now,

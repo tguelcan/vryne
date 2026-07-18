@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Weather service: cache per REGION per full UTC hour. Missing hours are
+// Weather service: cache per region per full UTC hour. Missing hours are
 // fetched from Open-Meteo and upserted during reads. If the API fails, the
 // synthetic fallback fills the gap and marks those hours as "estimated".
 // The game never blocks on the external service.
@@ -7,11 +7,14 @@
 
 import { dev } from "$app/env";
 import { prisma } from "$server/db";
-import { REGION } from "../gameConfig";
+import type { RegionData } from "../production";
 import { hourKeyMs } from "../production";
 import { fallbackWeather } from "../weatherFallback";
 import { fixtureWeatherHours } from "../fixtures";
 import { devState } from "./time";
+
+/** Region row as needed by the weather service. */
+export type WeatherRegion = RegionData & { id: string };
 
 export type WeatherRow = {
   hourUtc: Date;
@@ -28,6 +31,7 @@ const FETCH_TIMEOUT_MS = 5_000;
  * caching missing hours. Never throws on API failure.
  */
 export async function ensureWeatherHours(
+  region: WeatherRegion,
   from: Date,
   to: Date,
   now: Date,
@@ -48,7 +52,7 @@ export async function ensureWeatherHours(
 
   const cached = await prisma.weatherHour.findMany({
     where: {
-      regionId: REGION.id,
+      regionId: region.id,
       hourUtc: { gte: new Date(startMs), lte: new Date(endMs) },
     },
   });
@@ -64,7 +68,7 @@ export async function ensureWeatherHours(
   });
 
   if (missing.length > 0) {
-    const fetched = await fetchOpenMeteo(new Date(missing[0]), now);
+    const fetched = await fetchOpenMeteo(region, new Date(missing[0]), now);
     const upserts: WeatherRow[] = [];
     for (const h of missing) {
       const live = fetched.get(h);
@@ -72,7 +76,7 @@ export async function ensureWeatherHours(
         ? { hourUtc: new Date(h), ...live, estimated: false }
         : {
             hourUtc: new Date(h),
-            ...fallbackWeather(new Date(h), REGION),
+            ...fallbackWeather(new Date(h), region),
             estimated: true,
           };
       byHour.set(h, row);
@@ -82,14 +86,14 @@ export async function ensureWeatherHours(
       upserts.map((row) =>
         prisma.weatherHour.upsert({
           where: {
-            regionId_hourUtc: { regionId: REGION.id, hourUtc: row.hourUtc },
+            regionId_hourUtc: { regionId: region.id, hourUtc: row.hourUtc },
           },
           update: {
             solarWm2: row.solarWm2,
             windMs: row.windMs,
             estimated: row.estimated,
           },
-          create: { regionId: REGION.id, ...row },
+          create: { regionId: region.id, ...row },
         }),
       ),
     );
@@ -100,6 +104,7 @@ export async function ensureWeatherHours(
 
 /** Fetches hourly radiation + wind from Open-Meteo. Returns empty map on failure. */
 async function fetchOpenMeteo(
+  region: WeatherRegion,
   earliest: Date,
   now: Date,
 ): Promise<Map<number, { solarWm2: number; windMs: number }>> {
@@ -110,7 +115,7 @@ async function fetchOpenMeteo(
       Math.max(0, Math.ceil((now.getTime() - earliest.getTime()) / 86_400_000)),
     );
     const url =
-      `https://api.open-meteo.com/v1/forecast?latitude=${REGION.latitude}&longitude=${REGION.longitude}` +
+      `https://api.open-meteo.com/v1/forecast?latitude=${region.latitude}&longitude=${region.longitude}` +
       `&hourly=shortwave_radiation,wind_speed_10m&wind_speed_unit=ms&timezone=UTC` +
       `&past_days=${pastDays}&forecast_days=2`;
     const res = await fetch(url, {
