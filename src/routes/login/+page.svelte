@@ -24,10 +24,11 @@
 <svelte:head><title>Sign in · Vryne</title></svelte:head>
 
 <main class="mx-auto flex w-full max-w-xs flex-1 flex-col justify-center gap-4">
-  <h2 class="text-sm tracking-widest">SIGN IN</h2>
+  <h2 class="text-sm tracking-widest">RUN YOUR OWN GRID</h2>
   <p class="text-muted text-xs">
-    Connect your grid. We only use your account to sign you in — no posts, no
-    contacts.
+    Vryne is a cozy idle game: solar, wind and storage — driven by the real
+    weather over your home town and real electricity prices. Produce while
+    you're away, sell at the right moment, climb the leaderboard.
   </p>
 
   <Button
@@ -63,6 +64,7 @@
 
   <p class="text-muted text-xs">
     By signing in you agree to our <a class="underline" href="/terms">terms</a>
-    and <a class="underline" href="/privacy">privacy policy</a>.
+    and <a class="underline" href="/privacy">privacy policy</a>. We only use
+    your account to sign you in — no posts, no contacts.
   </p>
 </main>
