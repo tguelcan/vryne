@@ -2,6 +2,8 @@
   import Button from "$components/elements/Button.svelte";
   import { authClient } from "$lib/auth-client";
 
+  let { data } = $props();
+
   let pending = $state<"google" | "facebook" | null>(null);
   let message = $state("");
 
@@ -33,7 +35,7 @@
     color="neutral"
     type="button"
     loading={pending === "google"}
-    disabled={pending !== null}
+    disabled={pending !== null || !data.providers.google}
     onclick={() => void signIn("google")}
   >
     Continue with Google
@@ -43,11 +45,17 @@
     color="neutral"
     type="button"
     loading={pending === "facebook"}
-    disabled={pending !== null}
+    disabled={pending !== null || !data.providers.facebook}
     onclick={() => void signIn("facebook")}
   >
     Continue with Facebook
   </Button>
+
+  {#if !data.providers.facebook || !data.providers.google}
+    <p class="text-muted text-xs">
+      Greyed-out providers aren't configured on this server.
+    </p>
+  {/if}
 
   {#if message}
     <p class="text-error text-xs">{message}</p>
